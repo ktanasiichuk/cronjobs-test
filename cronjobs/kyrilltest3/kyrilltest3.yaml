@@ -1,0 +1,52 @@
+---
+apiVersion: batch/v1  
+kind: CronJob  
+metadata:  
+  name: kyrilltest3-bsnkj
+  labels:  
+    groupName: KyrillTest3
+  namespace: scheduledtask-test
+spec:  
+  schedule: "0 8 * * *"
+  suspend: true
+  jobTemplate:  
+    spec:
+      template:
+        metadata:
+          labels:
+            groupName: KyrillTest3
+        spec:  
+          containers:  
+          - name: backup  
+            image: busybox:1.35  
+            command:  
+            - /bin/sh  
+            - -c  
+            - "echo 'Running backup task 3.1' && sleep 30"  
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1  
+kind: CronJob  
+metadata:  
+  name: kyrilltest3-gtoap
+  labels:  
+    groupName: KyrillTest3
+  namespace: scheduledtask-test
+spec:  
+  schedule: "0 12 * * *"
+  suspend: true
+  jobTemplate:  
+    spec:
+      template:
+        metadata:
+          labels:
+            groupName: KyrillTest3
+        spec:  
+          containers:  
+          - name: backup  
+            image: busybox:1.35  
+            command:  
+            - /bin/sh  
+            - -c  
+            - "echo 'Running backup task 3' && sleep 30"  
+          restartPolicy: OnFailure
