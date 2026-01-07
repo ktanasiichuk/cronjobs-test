@@ -21,7 +21,7 @@ metadata:
     logging: >-
       http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer
     nagiosLabels: TEAMVK
-    tag: 8.0-3.0.3
+    tag: 8.0-3
     template: schedtask-dotnet-linux
   creationTimestamp: '2026-01-07T15:10:53Z'
   generation: 1
