@@ -1,52 +1,159 @@
+
 ---
-apiVersion: batch/v1  
-kind: CronJob  
-metadata:  
-  name: kyrilltest3-bsnkj
-  labels:  
-    groupName: KyrillTest3
-  namespace: scheduledtask-test
-spec:  
-  schedule: "0 8 * * *"
-  suspend: true
-  jobTemplate:  
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    comment: ""
+    documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
+    image: registry.k8s.traveltrex.local/schedtask-dotnet-linux
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{"comment":"","documentation":"https://wiki2.traveltrex.local/display/ITSoftware/AutoBookingConfirmer","image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows","lastchangeoperation":"Edit","lastchangetime":"18.08.2022 07:12:47","lastchangeuser":"c.weirich","logging":"http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer","nagiosLabels":"TEAMVK","tag":"4.8-2.0.0","template":"schedtask-dotnet-windows"},"creationTimestamp":"2022-01-03T09:41:20Z","generation":4,"labels":{"groupName":"AutoBookingConfirmer-Live"},"name":"autobookingconfirmer-live-293ku-20ef1","namespace":"scheduledtask","resourceVersion":"1274575287","uid":"e3484b4f-3ad5-4862-b481-141186f5098c"},"spec":{"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":1,"jobTemplate":{"metadata":{"creationTimestamp":null,"labels":{"groupName":"AutoBookingConfirmer-Live"}},"spec":{"activeDeadlineSeconds":240,"backoffLimit":0,"template":{"metadata":{"creationTimestamp":null},"spec":{"containers":[{"env":[{"name":"TASKDIR","value":"AutoBookingConfirmer"},{"name":"TASK","value":"AutoBookingConfirmer.exe umgebung=Live"},{"name":"NETSHARE_USER","valueFrom":{"secretKeyRef":{"key":"username","name":"scheduledtask-user"}}},{"name":"NETSHARE_PW","valueFrom":{"secretKeyRef":{"key":"password","name":"scheduledtask-user"}}},{"name":"NETSHARE_SERVER","valueFrom":{"configMapKeyRef":{"key":"servername","name":"scheduledtask-server"}}},{"name":"NETWORK_DRIVES"}],"image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows:4.8-2.0.0","imagePullPolicy":"IfNotPresent","name":"dotnet-framework","resources":{"limits":{"cpu":"200m","memory":"200Mi"},"requests":{"cpu":"150m","memory":"150Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"C:\\TaskplanerTools","name":"taskplaner-tools"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"windows"},"restartPolicy":"Never","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"name":"taskplaner-tools","persistentVolumeClaim":{"claimName":"pvc-taskplaner-tools"}}]}}}},"schedule":"* 1-23 * * *","startingDeadlineSeconds":21600,"successfulJobsHistoryLimit":1,"suspend":false,"timeZone":"Europe/Berlin"},"status":{"active":[{"apiVersion":"batch/v1","kind":"Job","name":"autobookingconfirmer-live-293ku-20ef1-28181466","namespace":"scheduledtask","resourceVersion":"1274575282","uid":"0e0378f1-f632-4cc3-a93b-9a370e67c643"}],"lastScheduleTime":"2023-08-01T11:06:00Z","lastSuccessfulTime":"2023-08-01T11:05:55Z"}}
+    lastchangeoperation: Edit
+    lastchangetime: 2026-01-02T09:01:10.992+01:00
+    lastchangeuser: Christian Weirich
+    logging: http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer
+    nagiosLabels: TEAMVK
+    tag: 8.0-3.0.3
+    template: schedtask-dotnet-linux
+    environment: live
+  labels:
+    groupName: AutoBookingConfirmer-Live
+  name: autobookingconfirmer-live-293ku-20ef1
+  namespace: scheduledtask
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        groupName: AutoBookingConfirmer-Live
     spec:
+      activeDeadlineSeconds: 300
+      backoffLimit: 0
       template:
         metadata:
           labels:
-            groupName: KyrillTest3
-        spec:  
-          containers:  
-          - name: backup  
-            image: busybox:1.35  
-            command:  
-            - /bin/sh  
-            - -c  
-            - "echo 'Running backup task 3.1' && sleep 30"  
-          restartPolicy: OnFailure
----
-apiVersion: batch/v1  
-kind: CronJob  
-metadata:  
-  name: kyrilltest3-gtoap
-  labels:  
-    groupName: KyrillTest3
-  namespace: scheduledtask-test
-spec:  
-  schedule: "0 12 * * *"
+            groupName: AutoBookingConfirmer-Live
+        spec:
+          containers:
+          - env:
+            - name: TASK
+              value: ./net8/AutoBookingConfirmer.dll umgebung=Live
+            - name: TASKDIR
+              value: AutoBookingConfirmer
+            image: registry.k8s.traveltrex.local/schedtask-dotnet-linux:8.0-3.0.3
+            imagePullPolicy: IfNotPresent
+            name: schedtask-dotnet-linux
+            resources:
+              limits:
+                cpu: 200m
+                memory: 200Mi
+              requests:
+                cpu: 150m
+                memory: 150Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /mnt/scheduledtask
+              name: taskplaner-tools
+            - mountPath: /mnt/scheduledtask/L
+              name: scheduledtask-l
+          dnsPolicy: ClusterFirst
+          nodeSelector:
+            kubernetes.io/os: linux
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - name: taskplaner-tools
+            persistentVolumeClaim:
+              claimName: pvc-taskplaner-tools
+          - name: scheduledtask-l
+            persistentVolumeClaim:
+              claimName: pvc-scheduledtask-l
+  schedule: '* 1-23 * * *'
+  startingDeadlineSeconds: 21600
+  successfulJobsHistoryLimit: 1
   suspend: true
-  jobTemplate:  
+  timeZone: Europe/Berlin
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    comment: ""
+    documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
+    image: registry.k8s.traveltrex.local/schedtask-dotnet-linux
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{"comment":"","documentation":"https://wiki2.traveltrex.local/display/ITSoftware/AutoBookingConfirmer","image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows","lastchangeoperation":"Edit","lastchangetime":"18.08.2022 07:12:47","lastchangeuser":"c.weirich","logging":"http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer","nagiosLabels":"TEAMVK","tag":"4.8-2.0.0","template":"schedtask-dotnet-windows"},"creationTimestamp":"2022-01-03T09:41:26Z","generation":4,"labels":{"groupName":"AutoBookingConfirmer-Live"},"name":"autobookingconfirmer-live-6mop5-1eeb3","namespace":"scheduledtask","resourceVersion":"1274564238","uid":"2b62d43f-d59c-458d-a3c7-788a99067fe5"},"spec":{"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":1,"jobTemplate":{"metadata":{"creationTimestamp":null,"labels":{"groupName":"AutoBookingConfirmer-Live"}},"spec":{"activeDeadlineSeconds":240,"backoffLimit":0,"template":{"metadata":{"creationTimestamp":null},"spec":{"containers":[{"env":[{"name":"TASKDIR","value":"AutoBookingConfirmer"},{"name":"TASK","value":"AutoBookingConfirmer.exe umgebung=Live"},{"name":"NETSHARE_USER","valueFrom":{"secretKeyRef":{"key":"username","name":"scheduledtask-user"}}},{"name":"NETSHARE_PW","valueFrom":{"secretKeyRef":{"key":"password","name":"scheduledtask-user"}}},{"name":"NETSHARE_SERVER","valueFrom":{"configMapKeyRef":{"key":"servername","name":"scheduledtask-server"}}},{"name":"NETWORK_DRIVES"}],"image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows:4.8-2.0.0","imagePullPolicy":"IfNotPresent","name":"dotnet-framework","resources":{"limits":{"cpu":"200m","memory":"200Mi"},"requests":{"cpu":"150m","memory":"150Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"C:\\TaskplanerTools","name":"taskplaner-tools"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"windows"},"restartPolicy":"Never","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"name":"taskplaner-tools","persistentVolumeClaim":{"claimName":"pvc-taskplaner-tools"}}]}}}},"schedule":"30/1 0 * * *","startingDeadlineSeconds":21600,"successfulJobsHistoryLimit":1,"suspend":false,"timeZone":"Europe/Berlin"},"status":{"lastScheduleTime":"2023-07-31T22:59:00Z","lastSuccessfulTime":"2023-07-31T22:59:24Z"}}
+    lastchangeoperation: Edit
+    lastchangetime: 2026-01-02T09:01:10.992+01:00
+    lastchangeuser: Christian Weirich
+    logging: http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer
+    nagiosLabels: TEAMVK
+    tag: 8.0-3.0.3
+    template: schedtask-dotnet-linux
+    environment: live
+  labels:
+    groupName: AutoBookingConfirmer-Live
+  name: autobookingconfirmer-live-6mop5-1eeb3
+  namespace: scheduledtask
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        groupName: AutoBookingConfirmer-Live
     spec:
+      activeDeadlineSeconds: 300
+      backoffLimit: 0
       template:
         metadata:
           labels:
-            groupName: KyrillTest3
-        spec:  
-          containers:  
-          - name: backup  
-            image: busybox:1.35  
-            command:  
-            - /bin/sh  
-            - -c  
-            - "echo 'Running backup task 3' && sleep 30"  
-          restartPolicy: OnFailure
+            groupName: AutoBookingConfirmer-Live
+        spec:
+          containers:
+          - env:
+            - name: TASK
+              value: ./net8/AutoBookingConfirmer.dll umgebung=Live
+            - name: TASKDIR
+              value: AutoBookingConfirmer
+            image: registry.k8s.traveltrex.local/schedtask-dotnet-linux:8.0-3.0.3
+            imagePullPolicy: IfNotPresent
+            name: schedtask-dotnet-linux
+            resources:
+              limits:
+                cpu: 200m
+                memory: 200Mi
+              requests:
+                cpu: 150m
+                memory: 150Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /mnt/scheduledtask
+              name: taskplaner-tools
+            - mountPath: /mnt/scheduledtask/L
+              name: scheduledtask-l
+          dnsPolicy: ClusterFirst
+          nodeSelector:
+            kubernetes.io/os: linux
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - name: taskplaner-tools
+            persistentVolumeClaim:
+              claimName: pvc-taskplaner-tools
+          - name: scheduledtask-l
+            persistentVolumeClaim:
+              claimName: pvc-scheduledtask-l
+  schedule: 30/1 0 * * *
+  startingDeadlineSeconds: 21600
+  successfulJobsHistoryLimit: 1
+  suspend: true
+  timeZone: Europe/Berlin
