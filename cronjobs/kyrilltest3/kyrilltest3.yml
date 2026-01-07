@@ -20,7 +20,7 @@ metadata:
   labels:
     groupName: AutoBookingConfirmer-Live
   name: autobookingconfirmer-live-293ku-20ef1
-  namespace: scheduledtask
+  namespace: scheduledtask-test
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -99,7 +99,7 @@ metadata:
   labels:
     groupName: AutoBookingConfirmer-Live
   name: autobookingconfirmer-live-6mop5-1eeb3
-  namespace: scheduledtask
+  namespace: scheduledtask-test
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
