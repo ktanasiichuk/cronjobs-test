@@ -1,27 +1,25 @@
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: kyrilltest3-cronjob:batch/CronJob:scheduledtask-test/autobookingconfirmer-live-293ku-20ef1
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
-    environment: live
     image: registry.k8s.traveltrex.local/schedtask-dotnet-linux
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{"comment":"10.2.2025, 17:37:18 - Francesco Riggio: Noch nicht nachts auszuführen","documentation":"https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/149029240/AgenturDatenanlageKorrekturen","forceCompleteRequest":"0001-01-01T00:00:00.0000000","image":"registry.k8s.traveltrex.local/schedtask-powershell","lastchangeoperation":"Edit","lastchangetime":"2025-02-10T17:34:11.520+01:00","lastchangeuser":"Francesco Riggio","logging":"","nagiosLabels":"TEAMVK","tag":"1.0.17","template":"schedtask-powershell"},"labels":{"argocd.argoproj.io/instance":"kubertasks-cronjobs","groupName":"AgenturDatenanlageKorrekturen"},"name":"agenturdatenanlagekorrekturen-w7w6l","namespace":"scheduledtask"},"spec":{"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":1,"jobTemplate":{"metadata":{"labels":{"groupName":"AgenturDatenanlageKorrekturen"}},"spec":{"activeDeadlineSeconds":120,"backoffLimit":0,"template":{"metadata":{"labels":{"groupName":"AgenturDatenanlageKorrekturen"}},"spec":{"containers":[{"env":[{"name":"SCRIPT","value":"AgenturDatenanlageKorrekturen.ps1 live"},{"name":"DIRECTORY","value":"AgenturDatenanlageKorrekturen"}],"image":"registry.k8s.traveltrex.local/schedtask-powershell:1.0.17","imagePullPolicy":"IfNotPresent","name":"powershell","resources":{"limits":{"cpu":"190m","memory":"260Mi"},"requests":{"cpu":"100m","memory":"250Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/mnt/scheduledtask","name":"pvc-taskplaner-tools"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"linux"},"restartPolicy":"Never","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"name":"pvc-taskplaner-tools","persistentVolumeClaim":{"claimName":"pvc-taskplaner-tools"}}]}}}},"schedule":"0 0 * * *","startingDeadlineSeconds":21600,"successfulJobsHistoryLimit":1,"suspend":true,"timeZone":"Europe/Berlin"}}
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{"comment":"","documentation":"https://wiki2.traveltrex.local/display/ITSoftware/AutoBookingConfirmer","image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows","lastchangeoperation":"Edit","lastchangetime":"18.08.2022 07:12:47","lastchangeuser":"c.weirich","logging":"http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer","nagiosLabels":"TEAMVK","tag":"4.8-2.0.0","template":"schedtask-dotnet-windows"},"creationTimestamp":"2022-01-03T09:41:20Z","generation":4,"labels":{"groupName":"AutoBookingConfirmer-Live"},"name":"autobookingconfirmer-live-293ku-20ef1","namespace":"scheduledtask","resourceVersion":"1274575287","uid":"e3484b4f-3ad5-4862-b481-141186f5098c"},"spec":{"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":1,"jobTemplate":{"metadata":{"creationTimestamp":null,"labels":{"groupName":"AutoBookingConfirmer-Live"}},"spec":{"activeDeadlineSeconds":240,"backoffLimit":0,"template":{"metadata":{"creationTimestamp":null},"spec":{"containers":[{"env":[{"name":"TASKDIR","value":"AutoBookingConfirmer"},{"name":"TASK","value":"AutoBookingConfirmer.exe umgebung=Live"},{"name":"NETSHARE_USER","valueFrom":{"secretKeyRef":{"key":"username","name":"scheduledtask-user"}}},{"name":"NETSHARE_PW","valueFrom":{"secretKeyRef":{"key":"password","name":"scheduledtask-user"}}},{"name":"NETSHARE_SERVER","valueFrom":{"configMapKeyRef":{"key":"servername","name":"scheduledtask-server"}}},{"name":"NETWORK_DRIVES"}],"image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows:4.8-2.0.0","imagePullPolicy":"IfNotPresent","name":"dotnet-framework","resources":{"limits":{"cpu":"200m","memory":"200Mi"},"requests":{"cpu":"150m","memory":"150Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"C:\\TaskplanerTools","name":"taskplaner-tools"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"windows"},"restartPolicy":"Never","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"name":"taskplaner-tools","persistentVolumeClaim":{"claimName":"pvc-taskplaner-tools"}}]}}}},"schedule":"* 1-23 * * *","startingDeadlineSeconds":21600,"successfulJobsHistoryLimit":1,"suspend":false,"timeZone":"Europe/Berlin"},"status":{"active":[{"apiVersion":"batch/v1","kind":"Job","name":"autobookingconfirmer-live-293ku-20ef1-28181466","namespace":"scheduledtask","resourceVersion":"1274575282","uid":"0e0378f1-f632-4cc3-a93b-9a370e67c643"}],"lastScheduleTime":"2023-08-01T11:06:00Z","lastSuccessfulTime":"2023-08-01T11:05:55Z"}}
     lastchangeoperation: Edit
-    lastchangetime: "2026-01-02T09:01:10.992+01:00"
+    lastchangetime: 2026-01-02T09:01:10.992+01:00
     lastchangeuser: Christian Weirich
     logging: http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer
     nagiosLabels: TEAMVK
     tag: 8.0-3.0.3
     template: schedtask-dotnet-linux
-  creationTimestamp: "2026-01-07T15:36:16Z"
-  generation: 1
+    environment: live
   labels:
     groupName: AutoBookingConfirmer-Live
   name: autobookingconfirmer-live-293ku-20ef1
-  namespace: scheduledtask-test
+  namespace: scheduledtask
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -77,33 +75,30 @@ spec:
   schedule: '* 1-23 * * *'
   startingDeadlineSeconds: 21600
   successfulJobsHistoryLimit: 1
-  suspend: true
+  suspend: false
   timeZone: Europe/Berlin
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   annotations:
-    argocd.argoproj.io/tracking-id: kyrilltest3-cronjob:batch/CronJob:scheduledtask-test/autobookingconfirmer-live-6mop5-1eeb3
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
-    environment: live
     image: registry.k8s.traveltrex.local/schedtask-dotnet-linux
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{"comment":"10.2.2025, 17:37:18 - Francesco Riggio: Noch nicht nachts auszuführen","documentation":"https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/149029240/AgenturDatenanlageKorrekturen","forceCompleteRequest":"0001-01-01T00:00:00.0000000","image":"registry.k8s.traveltrex.local/schedtask-powershell","lastchangeoperation":"Edit","lastchangetime":"2025-02-10T17:34:11.520+01:00","lastchangeuser":"Francesco Riggio","logging":"","nagiosLabels":"TEAMVK","tag":"1.0.17","template":"schedtask-powershell"},"labels":{"argocd.argoproj.io/instance":"kubertasks-cronjobs","groupName":"AgenturDatenanlageKorrekturen"},"name":"agenturdatenanlagekorrekturen-w7w6l","namespace":"scheduledtask"},"spec":{"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":1,"jobTemplate":{"metadata":{"labels":{"groupName":"AgenturDatenanlageKorrekturen"}},"spec":{"activeDeadlineSeconds":120,"backoffLimit":0,"template":{"metadata":{"labels":{"groupName":"AgenturDatenanlageKorrekturen"}},"spec":{"containers":[{"env":[{"name":"SCRIPT","value":"AgenturDatenanlageKorrekturen.ps1 live"},{"name":"DIRECTORY","value":"AgenturDatenanlageKorrekturen"}],"image":"registry.k8s.traveltrex.local/schedtask-powershell:1.0.17","imagePullPolicy":"IfNotPresent","name":"powershell","resources":{"limits":{"cpu":"190m","memory":"260Mi"},"requests":{"cpu":"100m","memory":"250Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/mnt/scheduledtask","name":"pvc-taskplaner-tools"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"linux"},"restartPolicy":"Never","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"name":"pvc-taskplaner-tools","persistentVolumeClaim":{"claimName":"pvc-taskplaner-tools"}}]}}}},"schedule":"0 0 * * *","startingDeadlineSeconds":21600,"successfulJobsHistoryLimit":1,"suspend":true,"timeZone":"Europe/Berlin"}}
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{"comment":"","documentation":"https://wiki2.traveltrex.local/display/ITSoftware/AutoBookingConfirmer","image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows","lastchangeoperation":"Edit","lastchangetime":"18.08.2022 07:12:47","lastchangeuser":"c.weirich","logging":"http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer","nagiosLabels":"TEAMVK","tag":"4.8-2.0.0","template":"schedtask-dotnet-windows"},"creationTimestamp":"2022-01-03T09:41:26Z","generation":4,"labels":{"groupName":"AutoBookingConfirmer-Live"},"name":"autobookingconfirmer-live-6mop5-1eeb3","namespace":"scheduledtask","resourceVersion":"1274564238","uid":"2b62d43f-d59c-458d-a3c7-788a99067fe5"},"spec":{"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":1,"jobTemplate":{"metadata":{"creationTimestamp":null,"labels":{"groupName":"AutoBookingConfirmer-Live"}},"spec":{"activeDeadlineSeconds":240,"backoffLimit":0,"template":{"metadata":{"creationTimestamp":null},"spec":{"containers":[{"env":[{"name":"TASKDIR","value":"AutoBookingConfirmer"},{"name":"TASK","value":"AutoBookingConfirmer.exe umgebung=Live"},{"name":"NETSHARE_USER","valueFrom":{"secretKeyRef":{"key":"username","name":"scheduledtask-user"}}},{"name":"NETSHARE_PW","valueFrom":{"secretKeyRef":{"key":"password","name":"scheduledtask-user"}}},{"name":"NETSHARE_SERVER","valueFrom":{"configMapKeyRef":{"key":"servername","name":"scheduledtask-server"}}},{"name":"NETWORK_DRIVES"}],"image":"registry.k8s.traveltrex.local/schedtask-dotnet-windows:4.8-2.0.0","imagePullPolicy":"IfNotPresent","name":"dotnet-framework","resources":{"limits":{"cpu":"200m","memory":"200Mi"},"requests":{"cpu":"150m","memory":"150Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"C:\\TaskplanerTools","name":"taskplaner-tools"}]}],"dnsPolicy":"ClusterFirst","nodeSelector":{"kubernetes.io/os":"windows"},"restartPolicy":"Never","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"name":"taskplaner-tools","persistentVolumeClaim":{"claimName":"pvc-taskplaner-tools"}}]}}}},"schedule":"30/1 0 * * *","startingDeadlineSeconds":21600,"successfulJobsHistoryLimit":1,"suspend":false,"timeZone":"Europe/Berlin"},"status":{"lastScheduleTime":"2023-07-31T22:59:00Z","lastSuccessfulTime":"2023-07-31T22:59:24Z"}}
     lastchangeoperation: Edit
-    lastchangetime: "2026-01-02T09:01:10.992+01:00"
+    lastchangetime: 2026-01-02T09:01:10.992+01:00
     lastchangeuser: Christian Weirich
     logging: http://logstash-intern:9292/index.html#/dashboard/elasticsearch/AutoBookingConfirmer
     nagiosLabels: TEAMVK
     tag: 8.0-3.0.3
     template: schedtask-dotnet-linux
-  creationTimestamp: "2026-01-07T15:36:16Z"
-  generation: 1
+    environment: live
   labels:
     groupName: AutoBookingConfirmer-Live
   name: autobookingconfirmer-live-6mop5-1eeb3
-  namespace: scheduledtask-test
+  namespace: scheduledtask
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -159,7 +154,5 @@ spec:
   schedule: 30/1 0 * * *
   startingDeadlineSeconds: 21600
   successfulJobsHistoryLimit: 1
-  suspend: true
-
+  suspend: false
   timeZone: Europe/Berlin
-
