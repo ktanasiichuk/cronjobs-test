@@ -3,7 +3,7 @@ kind: CronJob
 metadata:  
   name: kyrilltest1-sfgnb
   labels:  
-    groupName: KyrillTest11111
+    groupName: KyrillTest1ArgoTest
   namespace: scheduledtask-test
 spec:  
   schedule: "0 2 * * *"
