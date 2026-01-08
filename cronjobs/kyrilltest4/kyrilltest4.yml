@@ -17,7 +17,7 @@ metadata:
     template: schedtask-dotnet-linux
     environment: live
   labels:
-    groupName: AutoBookingConfirmer-Live
+    groupName: AutoBookingConfirmer-LiveLive
   name: autobookingconfirmer-live-293ku-20ef1
   namespace: scheduledtask-test
 spec:
@@ -96,7 +96,7 @@ metadata:
     template: schedtask-dotnet-linux
     environment: live
   labels:
-    groupName: AutoBookingConfirmer-Live
+    groupName: AutoBookingConfirmer-LiveLive
   name: autobookingconfirmer-live-6mop5-1eeb3
   namespace: scheduledtask-test
 spec:
@@ -156,5 +156,6 @@ spec:
   successfulJobsHistoryLimit: 1
   suspend: true
   timeZone: Europe/Berlin
+
 
 
