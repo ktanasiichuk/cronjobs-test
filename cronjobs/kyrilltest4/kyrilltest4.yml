@@ -2,6 +2,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
+  labels:
+    groupName: AutoBooking
   annotations:
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
@@ -16,8 +18,6 @@ metadata:
     tag: 8.0-3.0.3
     template: schedtask-dotnet-linux
     environment: live
-  labels:
-    groupName: Auto
   name: autobookingconfirmer-live-293ku-20ef1
   namespace: scheduledtask-test
 spec:
@@ -81,6 +81,8 @@ spec:
 apiVersion: batch/v1
 kind: CronJob
 metadata:
+  labels:
+    groupName: AutoBooking
   annotations:
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
@@ -95,8 +97,6 @@ metadata:
     tag: 8.0-3.0.3
     template: schedtask-dotnet-linux
     environment: live
-  labels:
-    groupName: Auto
   name: autobookingconfirmer-live-6mop5-1eeb3
   namespace: scheduledtask-test
 spec:
@@ -156,6 +156,7 @@ spec:
   successfulJobsHistoryLimit: 1
   suspend: true
   timeZone: Europe/Berlin
+
 
 
 
