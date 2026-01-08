@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   labels:
-    groupName: AutoBooking
+    groupName: AutoBookingConfirmer
   annotations:
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
@@ -82,7 +82,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   labels:
-    groupName: AutoBooking
+    groupName: AutoBookingConfirmer
   annotations:
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
@@ -156,6 +156,7 @@ spec:
   successfulJobsHistoryLimit: 1
   suspend: true
   timeZone: Europe/Berlin
+
 
 
 
