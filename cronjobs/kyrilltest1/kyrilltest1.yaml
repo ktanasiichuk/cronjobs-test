@@ -6,7 +6,7 @@ metadata:
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{"argocd.argoproj.io/tracking-id":"kyrilltest1-cronjob:batch/CronJob:scheduledtask-test/kyrilltest1-sfgnb"},"labels":{"groupName":"KyrillTest1ArgoTest"},"name":"kyrilltest1-sfgnb","namespace":"scheduledtask-test"},"spec":{"jobTemplate":{"spec":{"template":{"metadata":{"labels":{"groupName":"KyrillTest1"}},"spec":{"containers":[{"command":["/bin/sh","-c","echo 'Running backup task 1' \u0026\u0026 sleep 30"],"image":"busybox:1.35","name":"backup"}],"restartPolicy":"OnFailure"}}}},"schedule":"0 2 * * *","suspend":true}}
   labels:  
-    groupName: KyrillTest1Argo
+    groupName: KyrillTest1ArgoTest1
   namespace: scheduledtask-test
 spec:  
   schedule: "0 2 * * *"
