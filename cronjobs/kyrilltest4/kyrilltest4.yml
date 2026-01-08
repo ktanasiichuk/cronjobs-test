@@ -20,8 +20,6 @@ metadata:
     groupName: AutoBookingConfirmer-Live
   name: autobookingconfirmer-live-293ku-20ef1
   namespace: scheduledtask-test
-  resourceVersion: "36219"
-  uid: 814ea800-5bee-4961-a84b-eaa540b44188
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -102,8 +100,6 @@ metadata:
     groupName: AutoBookingConfirmer-Live
   name: autobookingconfirmer-live-6mop5-1eeb3
   namespace: scheduledtask-test
-  resourceVersion: "36220"
-  uid: 72961c57-10cb-48c4-8fe2-661e84b9e422
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -160,4 +156,5 @@ spec:
   startingDeadlineSeconds: 21600
   successfulJobsHistoryLimit: 1
   suspend: true
+
   timeZone: Europe/Berlin
