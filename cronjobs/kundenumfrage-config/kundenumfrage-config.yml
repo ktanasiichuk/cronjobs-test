@@ -22,7 +22,7 @@ metadata:
     argocd.argoproj.io/instance: kubertasks-cronjobs
     groupName: Kundenumfrage-Configuration
   name: kundenumfrage-configuration-xyjvi-a4d26
-  namespace: scheduledtask-test
+  namespace: ktdev
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -79,4 +79,5 @@ spec:
   startingDeadlineSeconds: 21600
   successfulJobsHistoryLimit: 1
   suspend: true
+
   timeZone: Europe/Berlin
