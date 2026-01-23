@@ -21,7 +21,7 @@ metadata:
   labels:
     argocd.argoproj.io/instance: kubertasks-cronjobs
     groupName: Kundenumfrage-Configuration
-  name: kundenumfrage-configuration-xyjvi-a4d26
+  name: kundenumfrage-configuration-blablabla-test
   namespace: ktdev
 spec:
   concurrencyPolicy: Forbid
@@ -81,3 +81,4 @@ spec:
   suspend: true
 
   timeZone: Europe/Berlin
+
