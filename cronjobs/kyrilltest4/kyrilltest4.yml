@@ -17,7 +17,7 @@ metadata:
     template: schedtask-dotnet-linux
     environment: live
   name: autobookingconfirmer-live-293ku-20ef1
-  namespace: scheduledtask-test
+  namespace: ktdev
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -94,7 +94,7 @@ metadata:
     template: schedtask-dotnet-linux
     environment: live
   name: autobookingconfirmer-live-6mop5-1eeb3
-  namespace: scheduledtask-test
+  namespace: ktdev
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -152,6 +152,7 @@ spec:
   successfulJobsHistoryLimit: 1
   suspend: true
   timeZone: Europe/Berlin
+
 
 
 
