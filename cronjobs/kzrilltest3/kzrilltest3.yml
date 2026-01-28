@@ -1,0 +1,65 @@
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    comment: '27.11.2025, 15:47:16 - Kyrylo Tanasiichuk: test'
+    environment: test
+    documentation: Link to the wiki site
+    logging: ""
+    template: schedtask-dotnet-linux
+    image: registry.k8s.traveltrex.local/schedtask-dotnet-linux
+    lastchangeoperation: Edit
+    lastchangetime: 2026-01-15T14:39:47.091+01:00
+    lastchangeuser: Alexander Schul
+    tag: 10.0-4.0.0
+    forceCompleteRequest: 0001-01-01T00:00:00.0000000
+    nagiosLabels: AUSBILDUNG,DEVOPS
+  name: kyrilltestapp3-l8irx
+  namespace: scheduledtask
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        groupName: kyrillTestApp3
+    spec:
+      activeDeadlineSeconds: 3650
+      backoffLimit: 3
+      template:
+        metadata:
+          labels:
+            groupName: kyrillTestApp3
+        spec:
+          containers:
+          - env:
+            - name: TASKDIR
+              value: testDir
+            - name: TASK
+              value: task2.dll
+            image: registry.k8s.traveltrex.local/schedtask-dotnet-linux:10.0-4.0.0
+            name: dotnet-core
+            resources:
+              limits:
+                cpu: 190m
+                memory: 260Mi
+              requests:
+                cpu: 100m
+                memory: 250Mi
+            volumeMounts:
+            - mountPath: /mnt/dx01/Datenbank
+              name: pvc-dx01-database
+          nodeSelector:
+            kubernetes.io/os: linux
+          restartPolicy: Never
+          volumes:
+          - name: pvc-dx01-database
+            persistentVolumeClaim:
+              claimName: pvc-dx01-database
+  schedule: 20 20 3 1 *
+  startingDeadlineSeconds: 21600
+  successfulJobsHistoryLimit: 1
+  suspend: true
+  timeZone: Europe/Berlin
