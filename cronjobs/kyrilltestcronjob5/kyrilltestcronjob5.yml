@@ -20,7 +20,6 @@ metadata:
     environment: live
   labels:
     argocd.argoproj.io/instance: kubertasks-cronjobs
-    groupName: 
   name: kyrilltestcronjob5-blablabla-test
   namespace: ktdev
 spec:
@@ -81,6 +80,7 @@ spec:
   suspend: true
 
   timeZone: Europe/Berlin
+
 
 
 
