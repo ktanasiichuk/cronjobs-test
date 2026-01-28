@@ -18,6 +18,7 @@ metadata:
     nagiosLabels: AUSBILDUNG,DEVOPS
   name: kyrilltestapp3-l8irx
   namespace: scheduledtask
+  labels:
 spec:
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
@@ -62,4 +63,5 @@ spec:
   startingDeadlineSeconds: 21600
   successfulJobsHistoryLimit: 1
   suspend: true
+
   timeZone: Europe/Berlin
