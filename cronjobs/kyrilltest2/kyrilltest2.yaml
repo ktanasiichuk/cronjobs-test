@@ -3,9 +3,10 @@ kind: CronJob
 metadata:  
   name: kyrilltest2-bskap
   labels:  
-    groupName: KyrillTest2
+    groupName: KyrillTest2Testargo
   namespace: ktdev
 spec:  
+  timeZone: Europe/Berlin
   schedule: "0 3 * * *"
   suspend: true
   jobTemplate:  
