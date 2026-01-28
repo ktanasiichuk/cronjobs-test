@@ -8,7 +8,8 @@ metadata:
   labels:  
     groupName: KyrillTest1ArgoTestAgain
   namespace: ktdev
-spec:  
+spec:
+  timeZone: Europe/Berlin
   schedule: "0 2 * * *"
   suspend: true
   jobTemplate:  
