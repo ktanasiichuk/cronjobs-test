@@ -20,8 +20,8 @@ metadata:
     environment: live
   labels:
     argocd.argoproj.io/instance: kubertasks-cronjobs
-    groupName: Kundenumfrage-Configuration
-  name: kundenumfrage-configuration-blablabla-test
+    groupName: Kundenumfrage-Configuration-kyrilltest
+  name: kyrilltestcronjob5-blablabla-test
   namespace: ktdev
 spec:
   concurrencyPolicy: Forbid
@@ -29,14 +29,14 @@ spec:
   jobTemplate:
     metadata:
       labels:
-        groupName: Kundenumfrage-Configuration
+        groupName: Kundenumfrage-Configuration-kyrilltest
     spec:
       activeDeadlineSeconds: 120
       backoffLimit: 0
       template:
         metadata:
           labels:
-            groupName: Kundenumfrage-Configuration
+            groupName: Kundenumfrage-Configuration-kyrilltest
         spec:
           containers:
           - env:
@@ -81,4 +81,5 @@ spec:
   suspend: true
 
   timeZone: Europe/Berlin
+
 
