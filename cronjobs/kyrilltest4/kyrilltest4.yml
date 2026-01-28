@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   labels:
-    groupName: AutoBookingConfirmer
+    groupName: KyrillTestAutoBConTest
   annotations:
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
@@ -16,7 +16,7 @@ metadata:
     tag: 8.0-3.0.3
     template: schedtask-dotnet-linux
     environment: live
-  name: autobookingconfirmer-blablabla-test-test
+  name: kyrilltestautobcontest-blablabla-test-test
   namespace: ktdev
 spec:
   concurrencyPolicy: Forbid
@@ -24,21 +24,21 @@ spec:
   jobTemplate:
     metadata:
       labels:
-        groupName: AutoBookingConfirmer-Live
+        groupName: KyrillTestAutoBConTest
     spec:
       activeDeadlineSeconds: 300
       backoffLimit: 0
       template:
         metadata:
           labels:
-            groupName: AutoBookingConfirmer-Live
+            groupName: KyrillTestAutoBConTest
         spec:
           containers:
           - env:
             - name: TASK
-              value: ./net8/AutoBookingConfirmer.dll umgebung=Live
+              value: ./net8/KyrillTestAutoBConTest.dll umgebung=Live
             - name: TASKDIR
-              value: AutoBookingConfirmer
+              value: KyrillTestAutoBConTest
             image: registry.k8s.traveltrex.local/schedtask-dotnet-linux:8.0-3.0.3
             imagePullPolicy: IfNotPresent
             name: schedtask-dotnet-linux
@@ -80,7 +80,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   labels:
-    groupName: AutoBookingConfirmer
+    groupName: KyrillTestAutoBConTest2
   annotations:
     comment: ""
     documentation: https://traveltrex.atlassian.net/wiki/spaces/ITSoftware/pages/28051031/AutoBookingConfirmer
@@ -93,7 +93,7 @@ metadata:
     tag: 8.0-3.0.3
     template: schedtask-dotnet-linux
     environment: live
-  name: autobookingconfirmer-blabla-test-test2
+  name: kyrilltestautobcontest-blabla-test-test2
   namespace: ktdev
 spec:
   concurrencyPolicy: Forbid
@@ -101,21 +101,21 @@ spec:
   jobTemplate:
     metadata:
       labels:
-        groupName: AutoBookingConfirmer-Live
+        groupName: KyrillTestAutoBConTest
     spec:
       activeDeadlineSeconds: 300
       backoffLimit: 0
       template:
         metadata:
           labels:
-            groupName: AutoBookingConfirmer-Live
+            groupName: KyrillTestAutoBConTest
         spec:
           containers:
           - env:
             - name: TASK
-              value: ./net8/AutoBookingConfirmer.dll umgebung=Live
+              value: ./net8/KyrillTestAutoBConTest.dll umgebung=Live
             - name: TASKDIR
-              value: AutoBookingConfirmer
+              value: KyrillTestAutoBConTest
             image: registry.k8s.traveltrex.local/schedtask-dotnet-linux:8.0-3.0.3
             imagePullPolicy: IfNotPresent
             name: schedtask-dotnet-linux
@@ -152,6 +152,7 @@ spec:
   successfulJobsHistoryLimit: 1
   suspend: true
   timeZone: Europe/Berlin
+
 
 
 
